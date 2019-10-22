@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>noun_signal.svg</file>
+    </qresource>
+</RCC>
