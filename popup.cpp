@@ -5,10 +5,12 @@
 #include <QCloseEvent>
 #include<QScreen>
 #include<QPropertyAnimation>
+#include <QDebug>
 Popup::Popup(QWidget *parent) :
     QDialog(nullptr),
     ui(new Ui::Popup)
 {
+
         ui->setupUi(this);
         setStyleSheet("background-color:#ffffff");
         setWindowFlags(Qt::FramelessWindowHint|Qt::WindowSystemMenuHint|Qt::WindowStaysOnTopHint|Qt::Popup);
@@ -21,21 +23,22 @@ Popup::Popup(QWidget *parent) :
 
 
         this->autoPos();
+        qDebug()<<Ui::windowCount<<'\n';
 }
 void Popup::autoPos()
 {
     auto desktopRect = QGuiApplication::screens().front()->geometry();
 
-    auto h_max = desktopRect.height() / this->height();
+    auto h_max = Ui::windowCount*(desktopRect.height() / this->height());
     int x, y;
     //do {//To do
 
         x = desktopRect.width() - (3 * this->width());
         //y = this->height() * (NotificationWidgetRecord::GetInstance().LastIdx() % h_max);
-        y = this->height();
+        y = h_max;
 
     //} while ( x < 0);
-    this->move(x,y);
+    this->move(x,h_max);
 
 }
 void Popup::closeEvent(QCloseEvent *e)
@@ -46,17 +49,27 @@ void Popup::closeEvent(QCloseEvent *e)
 
 }
 
-int Popup::exec()
+void Popup::displayMessage()
+{   QTimer::singleShot(5000, this, SLOT(mClose()));
+    Ui::windowCount++;
+    this->open();
+}
+
+void Popup::showEvent(QShowEvent *)
 {
-    QTimer::singleShot(5000, this, SLOT(close()));
-    QPropertyAnimation an(this,"geometry");
-    an.setDuration(10000);
-    an.setStartValue(QRect(this->x(),this->y(),10,10));
-    an.setEndValue(QRect(this->x(),this->y(),1000,this->y()));
-    an.start();
-    return QDialog::exec();
+    QPropertyAnimation * an = new QPropertyAnimation(this,"windowOpacity");
+    an->setDuration(5000);
+    an->setStartValue(1.0);
+    an->setEndValue(0.0);
+    an->start(QAbstractAnimation::DeleteWhenStopped);
 }
 Popup::~Popup()
 {
     delete ui;
+}
+
+void Popup::mClose()
+{
+    Ui::windowCount--;
+    this->close();
 }

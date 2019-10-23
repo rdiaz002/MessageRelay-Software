@@ -8,7 +8,7 @@
 #include <QNetworkInterface>
 #include "appserver.h"
 #include <QThread>
-
+#include "notipanel.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -24,6 +24,8 @@ public slots:
     void openSettingsWindow();
     void quitApp();
     void readServerData(QByteArray);
+    void showNotiPanel();
+
 public:
     MainWindow();
     ~MainWindow();
@@ -38,16 +40,17 @@ private:
     void writeSavedData();
     void getIPAddress();
 
+
     Dialog * settingsDialog;
     QSystemTrayIcon *trayIcon;
     QMenu *trayIconMenu;
     AppServer * appServer;
     QThread * appThread;
-
+    NotiPanel * notiPanel;
     QAction * openSettings;
     QAction * quit;
     QAction * disconnect;
-
+    QAction * notifications;
 
 };
 #endif // MAINWINDOW_H

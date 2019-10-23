@@ -5,6 +5,7 @@
 
 namespace Ui {
 class Popup;
+static int windowCount =1;
 }
 
 class Popup : public QDialog
@@ -14,12 +15,16 @@ class Popup : public QDialog
 public:
     explicit Popup(QWidget *parent = nullptr);
     void closeEvent(QCloseEvent *) override;
-    int exec() override;
+    void displayMessage();
+    void showEvent(QShowEvent *) override;
     ~Popup();
 
+public slots:
+    void mClose();
 private:
     Ui::Popup *ui;
     void autoPos();
+
 };
 
 #endif // POPUP_H

@@ -54,6 +54,8 @@ MainWindow::MainWindow()
     trayIcon = new QSystemTrayIcon(this);
     trayIcon->setIcon(QIcon(":/icons/noun_signal.svg"));
 
+    notiPanel = new NotiPanel;
+
     setupContextMenu();
     setupConnections();
 
@@ -93,6 +95,10 @@ void MainWindow::setupActions()
     disconnect = new QAction("Disconnect",this);
     connect(disconnect,SIGNAL(triggered()),this,SLOT(disconnectServer()));
 
+    notifications = new QAction("Notifications",this);
+    connect(notifications,SIGNAL(triggered()),this,SLOT(showNotiPanel()));
+
+    trayIconMenu->addAction(notifications);
     trayIconMenu->addAction(openSettings);
     trayIconMenu->addAction(disconnect);
     trayIconMenu->addAction(quit);
@@ -152,5 +158,10 @@ void MainWindow::getIPAddress()
                IP_ADDRESS=entry.ip().toString();
             }
     }
+}
+
+void MainWindow::showNotiPanel()
+{
+    notiPanel->show();
 }
 

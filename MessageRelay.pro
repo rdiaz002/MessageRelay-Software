@@ -20,17 +20,20 @@ SOURCES += \
     dialog.cpp \
     main.cpp \
     mainwindow.cpp \
+    notipanel.cpp \
     popup.cpp
 
 HEADERS += \
     appserver.h \
     dialog.h \
     mainwindow.h \
+    notipanel.h \
     popup.h
 
 FORMS += \
     dialog.ui \
     mainwindow.ui \
+    notipanel.ui \
     popup.ui
 
 # Default rules for deployment.
