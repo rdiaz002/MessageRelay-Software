@@ -35,6 +35,7 @@ void MainWindow::readServerData(QByteArray data)
     int num_index= data.indexOf(0x02);
     int msg_index= data.indexOf(0x03);
     trayIcon->showMessage(data.left(num_index),data.mid(num_index+1,(msg_index-num_index)-1),QIcon());
+
 }
 
 MainWindow::MainWindow()
@@ -120,6 +121,7 @@ void MainWindow::setupConnections()
     connect(settingsDialog,&Dialog::disconnectServer,this,&MainWindow::disconnectServer);
 
 }
+
 
 void MainWindow::readSavedData()
 {

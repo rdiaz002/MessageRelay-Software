@@ -2,11 +2,22 @@
 #include "ui_notipanel.h"
 #include <QScreen>
 #include <QDesktopWidget>
+#include <QLabel>
+#include <QString>
+#include "messagewidget.h"
+#include "messagewidget.h"
+
+
 NotiPanel::NotiPanel(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::NotiPanel)
 {
     ui->setupUi(this);
+
+    this->operator<<({QString("Hell"),QString("Hi"),0});
+    this->operator<<({QString("Hell"),QString("Hi2"),0});
+
+    ui->verticalLayout->setAlignment(Qt::AlignTop);
     this->setWindowFlag(Qt::FramelessWindowHint,true);
     this->setWindowFlag(Qt::Popup,true);
 
@@ -35,4 +46,12 @@ QRect NotiPanel::setDialogSize()
 
 
     return sizeRect;
+}
+
+void NotiPanel::operator<<(MessageItem item)
+{
+    notifications.push(item);
+    MessageWidget * temp = new MessageWidget(this,item.num,item.message);
+    ui->verticalLayout->addWidget(temp);
+
 }

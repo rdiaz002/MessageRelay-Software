@@ -9,6 +9,8 @@
 #include "appserver.h"
 #include <QThread>
 #include "notipanel.h"
+
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -25,6 +27,7 @@ public slots:
     void quitApp();
     void readServerData(QByteArray);
     void showNotiPanel();
+//    void displayMessageWindow(MessageItem);
 
 public:
     MainWindow();
