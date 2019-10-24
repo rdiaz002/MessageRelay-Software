@@ -119,7 +119,7 @@ void MainWindow::setupConnections()
     connect(quit,SIGNAL(triggered()),appThread,SLOT(quit()));
     connect(settingsDialog,&Dialog::connectServer,this,&MainWindow::connectServer);
     connect(settingsDialog,&Dialog::disconnectServer,this,&MainWindow::disconnectServer);
-
+    connect(notiPanel,&NotiPanel::openMessageWindow,this,&MainWindow::openMessageWindow);
 }
 
 
@@ -165,5 +165,10 @@ void MainWindow::getIPAddress()
 void MainWindow::showNotiPanel()
 {
     notiPanel->show();
+}
+
+void MainWindow::openMessageWindow(MessageWidget * item)
+{
+    delete item;
 }
 

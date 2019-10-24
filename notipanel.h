@@ -3,7 +3,9 @@
 
 #include <QDialog>
 #include "messageutils.h"
-#include <queue>
+#include <unordered_set>
+#include "messagewidget.h"
+
 namespace Ui {
 class NotiPanel;
 }
@@ -15,14 +17,15 @@ class NotiPanel : public QDialog
 public:
     explicit NotiPanel(QWidget *parent = nullptr);
     ~NotiPanel();
+public slots:
+    void notificationClicked(MessageWidget *);
 signals:
-    void notificationClicked(MessageItem);
-
+    void openMessageWindow(MessageWidget*);
 private:
     Ui::NotiPanel *ui;
     QRect setDialogSize();
     void operator<< (MessageItem);
-    std::queue<MessageItem> notifications;
+    std::unordered_set<MessageWidget *> * notifications;
 
 
 };

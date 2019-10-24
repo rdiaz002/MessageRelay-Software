@@ -6,14 +6,18 @@
 #include <QString>
 #include "messagewidget.h"
 #include "messagewidget.h"
-
+#include <QDebug>
 
 NotiPanel::NotiPanel(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::NotiPanel)
 {
     ui->setupUi(this);
+    notifications = new std::unordered_set<MessageWidget *>;
 
+    //Test Samples
+    this->operator<<({QString("Hell"),QString("Hi"),0});
+    this->operator<<({QString("Hell"),QString("Hi2"),0});
     this->operator<<({QString("Hell"),QString("Hi"),0});
     this->operator<<({QString("Hell"),QString("Hi2"),0});
 
@@ -32,7 +36,14 @@ NotiPanel::~NotiPanel()
     delete ui;
 }
 
-QRect NotiPanel::setDialogSize()
+void NotiPanel::notificationClicked(MessageWidget * item) //When notification is clicked remove it from the layout and delete it from the notification list.
+{
+    ui->verticalLayout->removeWidget(item);
+    notifications->erase(item);
+    emit openMessageWindow(item);
+}
+
+QRect NotiPanel::setDialogSize() //get window size to properly size the NotificationPanel.
 {
     QScreen * mainScreen = QGuiApplication::screens()[0];
     double screenWidth = static_cast<double>(mainScreen->geometry().width());
@@ -43,15 +54,15 @@ QRect NotiPanel::setDialogSize()
     sizeRect.setHeight(static_cast<int>(screenHeight*0.90));
     sizeRect.moveTo(static_cast<int>(screenWidth)-sizeRect.width(),static_cast<int>(screenHeight*0.05));
 
-
-
     return sizeRect;
 }
 
-void NotiPanel::operator<<(MessageItem item)
+void NotiPanel::operator<<(MessageItem item) //Create a new MessageWidget and add it to the NotificationList and Layout.
 {
-    notifications.push(item);
+
     MessageWidget * temp = new MessageWidget(this,item.num,item.message);
+    notifications->insert(temp);
     ui->verticalLayout->addWidget(temp);
+    connect(temp,&MessageWidget::openMessageWindow,this,&NotiPanel::notificationClicked);
 
 }

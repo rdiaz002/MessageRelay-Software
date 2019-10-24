@@ -16,7 +16,7 @@ public:
     explicit MessageWidget(QWidget *parent = nullptr,QString number="", QString message="");
     ~MessageWidget();
 signals:
-    void openMessageWindow(MessageItem);
+    void openMessageWindow(MessageWidget *);
 private:
     Ui::MessageWidget *ui;
     MessageItem data;

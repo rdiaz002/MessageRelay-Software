@@ -22,6 +22,6 @@ MessageWidget::~MessageWidget()
 void MessageWidget::mousePressEvent(QMouseEvent *)
 {
     qDebug()<<data.id;
-    emit openMessageWindow(data);
+    emit openMessageWindow(this);
 }
 

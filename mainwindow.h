@@ -27,7 +27,7 @@ public slots:
     void quitApp();
     void readServerData(QByteArray);
     void showNotiPanel();
-//    void displayMessageWindow(MessageItem);
+    void openMessageWindow(MessageWidget *); //TODO: get Messages from cache or storage and display them in a window.
 
 public:
     MainWindow();
