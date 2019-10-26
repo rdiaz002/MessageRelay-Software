@@ -1,6 +1,6 @@
 #include "appserver.h"
 
-AppServer::AppServer(QHostAddress * address, quint16 port, QObject *parent) :address(address),port(port),QObject(parent)
+AppServer::AppServer(QHostAddress * address, quint16 port, QObject *parent) :QObject(parent),address(address),port(port)
 {
     client=nullptr;
     host= new QTcpServer(this);
@@ -19,8 +19,7 @@ void AppServer::startServer()
 void AppServer::endServer()
 {
     if(client!=nullptr){
-        client->close(); 
-        client->deleteLater();
+        client->close();
     }
     host->close();
 

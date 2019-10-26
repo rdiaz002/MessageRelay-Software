@@ -5,7 +5,7 @@
 struct MessageItem{
     QString num;
     QString message;
-    int id;
+    unsigned int id;
 };
 
 

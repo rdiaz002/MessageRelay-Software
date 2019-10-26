@@ -17,6 +17,7 @@ class NotiPanel : public QDialog
 public:
     explicit NotiPanel(QWidget *parent = nullptr);
     ~NotiPanel();
+     void operator<< (MessageItem);
 public slots:
     void notificationClicked(MessageWidget *);
 signals:
@@ -24,7 +25,6 @@ signals:
 private:
     Ui::NotiPanel *ui;
     QRect setDialogSize();
-    void operator<< (MessageItem);
     std::unordered_set<MessageWidget *> * notifications;
 
 

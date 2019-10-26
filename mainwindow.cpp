@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include <QtGui>
 #include <QIcon>
+#include <messageutils.h>
 
 
 void MainWindow::activated(QSystemTrayIcon::ActivationReason reason)
@@ -9,19 +10,9 @@ void MainWindow::activated(QSystemTrayIcon::ActivationReason reason)
     qDebug()<<reason;
 }
 
-void MainWindow::disconnectServer()
-{
-    appThread->quit();
-}
-
 void MainWindow::connectServer()
 {
     appThread->start();
-}
-
-void MainWindow::openSettingsWindow()
-{
-    settingsDialog->show();
 }
 
 void MainWindow::quitApp()
@@ -35,6 +26,11 @@ void MainWindow::readServerData(QByteArray data)
     int num_index= data.indexOf(0x02);
     int msg_index= data.indexOf(0x03);
     trayIcon->showMessage(data.left(num_index),data.mid(num_index+1,(msg_index-num_index)-1),QIcon());
+
+    MessageItem msg;
+    msg.num=data.left(num_index);
+    msg.message =data.mid(num_index+1,(msg_index-num_index)-1);
+    (*notiPanel) << msg;
 
 }
 
@@ -88,16 +84,16 @@ void MainWindow::setupContextMenu()
 void MainWindow::setupActions()
 {
     openSettings = new QAction("Open",this);
-    connect(openSettings,SIGNAL(triggered()),this,SLOT(openSettingsWindow()));
+    connect(openSettings,&QAction::triggered,settingsDialog,&Dialog::show);
 
     quit = new QAction("Quit",this);
-    connect(quit,SIGNAL(triggered()),this,SLOT(quitApp()));
+    connect(quit,&QAction::triggered,this,&MainWindow::quitApp);
 
     disconnect = new QAction("Disconnect",this);
-    connect(disconnect,SIGNAL(triggered()),this,SLOT(disconnectServer()));
+    connect(disconnect,&QAction::triggered,appThread,&QThread::quit);
 
     notifications = new QAction("Notifications",this);
-    connect(notifications,SIGNAL(triggered()),this,SLOT(showNotiPanel()));
+    connect(notifications,&QAction::triggered,notiPanel,&NotiPanel::show);
 
     trayIconMenu->addAction(notifications);
     trayIconMenu->addAction(openSettings);
@@ -118,7 +114,7 @@ void MainWindow::setupConnections()
     connect(appServer,SIGNAL(errorListening()),appThread,SLOT(quit()));
     connect(quit,SIGNAL(triggered()),appThread,SLOT(quit()));
     connect(settingsDialog,&Dialog::connectServer,this,&MainWindow::connectServer);
-    connect(settingsDialog,&Dialog::disconnectServer,this,&MainWindow::disconnectServer);
+    connect(settingsDialog,&Dialog::disconnectServer,appThread,&QThread::quit);
     connect(notiPanel,&NotiPanel::openMessageWindow,this,&MainWindow::openMessageWindow);
 }
 
@@ -160,11 +156,6 @@ void MainWindow::getIPAddress()
                IP_ADDRESS=entry.ip().toString();
             }
     }
-}
-
-void MainWindow::showNotiPanel()
-{
-    notiPanel->show();
 }
 
 void MainWindow::openMessageWindow(MessageWidget * item)

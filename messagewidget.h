@@ -20,7 +20,7 @@ signals:
 private:
     Ui::MessageWidget *ui;
     MessageItem data;
-    static int id;
+    static unsigned int id;
     void mousePressEvent(QMouseEvent *) override;
 };
 

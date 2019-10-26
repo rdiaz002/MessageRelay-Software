@@ -2,7 +2,7 @@
 #include "ui_messagewidget.h"
 #include "messageutils.h"
 #include <QDebug>
-int MessageWidget::id = 0;
+unsigned int MessageWidget::id = 0;
 
 MessageWidget::MessageWidget(QWidget *parent,QString number, QString message) :
     QFrame(parent),

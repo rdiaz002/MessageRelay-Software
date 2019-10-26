@@ -21,12 +21,9 @@ class MainWindow : public QMainWindow
 
 public slots:
     void activated(QSystemTrayIcon::ActivationReason reason);
-    void disconnectServer();
     void connectServer();
-    void openSettingsWindow();
     void quitApp();
     void readServerData(QByteArray);
-    void showNotiPanel();
     void openMessageWindow(MessageWidget *); //TODO: get Messages from cache or storage and display them in a window.
 
 public:
