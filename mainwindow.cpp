@@ -4,7 +4,6 @@
 #include <QIcon>
 #include <messageutils.h>
 
-
 void MainWindow::activated(QSystemTrayIcon::ActivationReason reason)
 {
     qDebug()<<reason;
@@ -32,10 +31,18 @@ void MainWindow::readServerData(QByteArray data)
     msg.message =data.mid(num_index+1,(msg_index-num_index)-1);
     (*notiPanel) << msg;
 
+    //Add entry to our logs if not found in logs.
+    if(chatLogs->find(msg.num.toStdString())==chatLogs->end()){
+        chatLogs->insert(std::make_pair(msg.num.toStdString(),QStringList()));
+    }
+    chatLogs->at(msg.num.toStdString()).push_back(msg.message);
+
+
 }
 
 MainWindow::MainWindow()
 {
+    chatLogs = new std::unordered_map<std::string,QStringList>;
 
     QApplication::setQuitOnLastWindowClosed(false);
 
@@ -119,6 +126,7 @@ void MainWindow::setupConnections()
 }
 
 
+
 void MainWindow::readSavedData()
 {
     QSettings savedData(QSettings::IniFormat,QSettings::UserScope,"ThisUs","MessageRelay");
@@ -133,14 +141,40 @@ void MainWindow::readSavedData()
         savedData.setValue("Server_port","8080");
     }
 
+    //Setup Message History Storage
+    msgHistory = new QFile("history.txt");
+    msgHistory->open(QIODevice::ReadWrite); // Needs error check.
 
+    //cache message history
+    QTextStream stream(msgHistory);
+    while(!stream.atEnd()){
+        QStringList line = stream.readLine().split(0x02);
+        if(line.empty()){
+            continue;
+        }
+        chatLogs->insert(std::make_pair(line.first().toStdString(),line.mid(1)));
+    }
+
+    stream.seek(0);
 }
 
 void MainWindow::writeSavedData()
 {
+    //Save Settings
     QSettings savedData(QSettings::IniFormat,QSettings::UserScope,"ThisUs","MessageRelay");
     savedData.setValue("Server_ip",IP_ADDRESS);
     savedData.setValue("Server_port",PORT);
+
+    //Save Message History
+    QTextStream stream (msgHistory);
+    for(auto i: *chatLogs){
+        stream<<QString::fromStdString(i.first);
+        for(auto j: i.second){
+            stream<<static_cast<char>(0x02)<<j;
+        }
+        stream<<'\n';
+    }
+    msgHistory->close();
 }
 
 void MainWindow::getIPAddress()

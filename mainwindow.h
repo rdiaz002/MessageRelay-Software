@@ -9,7 +9,10 @@
 #include "appserver.h"
 #include <QThread>
 #include "notipanel.h"
-
+#include <QFile>
+#include <unordered_map>
+#include <vector>
+#include <QString>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -52,5 +55,7 @@ private:
     QAction * disconnect;
     QAction * notifications;
 
+    QFile * msgHistory;
+    std::unordered_map<std::string, QStringList> *chatLogs;
 };
 #endif // MAINWINDOW_H
