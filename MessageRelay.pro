@@ -21,6 +21,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     messagewidget.cpp \
+    messagewindow.cpp \
     notipanel.cpp \
     popup.cpp
 
@@ -30,6 +31,7 @@ HEADERS += \
     mainwindow.h \
     messageutils.h \
     messagewidget.h \
+    messagewindow.h \
     notipanel.h \
     popup.h
 
@@ -37,6 +39,7 @@ FORMS += \
     dialog.ui \
     mainwindow.ui \
     messagewidget.ui \
+    messagewindow.ui \
     notipanel.ui \
     popup.ui
 

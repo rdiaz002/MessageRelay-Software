@@ -194,6 +194,7 @@ void MainWindow::getIPAddress()
 
 void MainWindow::openMessageWindow(MessageWidget * item)
 {
+
     delete item;
 }
 
