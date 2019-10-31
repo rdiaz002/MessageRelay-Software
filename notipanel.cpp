@@ -16,10 +16,10 @@ NotiPanel::NotiPanel(QWidget *parent) :
     notifications = new std::unordered_set<MessageWidget *>;
 
     //Test Samples
-    this->operator<<({QString("Hell"),QString("Hi"),0});
-    this->operator<<({QString("Hell"),QString("Hi2"),0});
-    this->operator<<({QString("Hell"),QString("Hi"),0});
-    this->operator<<({QString("Hell"),QString("Hi2"),0});
+//    this->operator<<({QString("Hell0"),QString("Hi"),0});
+//    this->operator<<({QString("Hell0"),QString("Hi2"),0});
+//    this->operator<<({QString("Hell0"),QString("Hi"),0});
+//    this->operator<<({QString("Hell0"),QString("Hi2"),0});
 
     ui->verticalLayout->setAlignment(Qt::AlignTop);
     this->setWindowFlag(Qt::FramelessWindowHint,true);

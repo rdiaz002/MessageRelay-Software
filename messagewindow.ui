@@ -25,6 +25,12 @@
    </property>
    <item>
     <widget class="QScrollArea" name="scrollArea">
+     <property name="horizontalScrollBarPolicy">
+      <enum>Qt::ScrollBarAsNeeded</enum>
+     </property>
+     <property name="sizeAdjustPolicy">
+      <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
+     </property>
      <property name="widgetResizable">
       <bool>true</bool>
      </property>
@@ -37,11 +43,14 @@
         <height>257</height>
        </rect>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_3">
+      <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <layout class="QVBoxLayout" name="chatBox" stretch="">
+        <layout class="QGridLayout" name="chatBox">
+         <property name="sizeConstraint">
+          <enum>QLayout::SetDefaultConstraint</enum>
+         </property>
          <property name="spacing">
-          <number>1</number>
+          <number>0</number>
          </property>
         </layout>
        </item>
