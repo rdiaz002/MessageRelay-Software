@@ -3,6 +3,8 @@
 #include<QDebug>
 #include<QLabel>
 
+//TODO: Update Message Window Styling.
+
 MessageWindow::MessageWindow(QStringList * msgList,QWidget *parent) :
     QDialog(parent),
     ui(new Ui::MessageWindow),
@@ -49,7 +51,7 @@ void MessageWindow::updateMessages()
 
 void MessageWindow::on_sendButton_clicked()
 {
-    msgList->push_back("Ronny TOo many spaces breaks TOo many spaces breaks TOo many spaces breaks TOo many spaces breaks TOo many spaces breaks TOo many spaces breaks TOo many spaces breaks");
+    //TODO: add the sending protocol to communicate with client app.
     updateMessages();
 }
 

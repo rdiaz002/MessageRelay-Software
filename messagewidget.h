@@ -13,13 +13,13 @@ class MessageWidget : public QFrame
     Q_OBJECT
 
 public:
-    explicit MessageWidget(QWidget *parent = nullptr,QString number="", QString message="");
+    explicit MessageWidget(MessageItem & item,QWidget *parent = nullptr);
     ~MessageWidget();
+    MessageItem data;
 signals:
     void openMessageWindow(MessageWidget *);
 private:
     Ui::MessageWidget *ui;
-    MessageItem data;
     static unsigned int id;
     void mousePressEvent(QMouseEvent *) override;
 };

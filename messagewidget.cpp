@@ -4,14 +4,14 @@
 #include <QDebug>
 unsigned int MessageWidget::id = 0;
 
-MessageWidget::MessageWidget(QWidget *parent,QString number, QString message) :
+MessageWidget::MessageWidget(MessageItem & item,QWidget *parent) :
     QFrame(parent),
     ui(new Ui::MessageWidget)
 {
     ui->setupUi(this);
-    ui->number->setText(number);
-    ui->Message->setText(message);
-    data = {number,message,id++};
+    ui->number->setText(item.name);
+    ui->Message->setText(item.message);
+    data = {item.name,item.num,item.message,id++};
 }
 
 MessageWidget::~MessageWidget()

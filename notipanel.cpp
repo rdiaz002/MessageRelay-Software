@@ -8,6 +8,8 @@
 #include "messagewidget.h"
 #include <QDebug>
 
+//TODO: Add notipanel clear all messages.
+
 NotiPanel::NotiPanel(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::NotiPanel)
@@ -60,7 +62,7 @@ QRect NotiPanel::setDialogSize() //get window size to properly size the Notifica
 void NotiPanel::operator<<(MessageItem item) //Create a new MessageWidget and add it to the NotificationList and Layout.
 {
 
-    MessageWidget * temp = new MessageWidget(this,item.num,item.message);
+    MessageWidget * temp = new MessageWidget(item,this);
     notifications->insert(temp);
     ui->verticalLayout->addWidget(temp);
     connect(temp,&MessageWidget::openMessageWindow,this,&NotiPanel::notificationClicked);

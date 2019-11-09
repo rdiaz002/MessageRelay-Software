@@ -3,6 +3,7 @@
 #include<QString>
 
 struct MessageItem{
+    QString name;
     QString num;
     QString message;
     unsigned int id;

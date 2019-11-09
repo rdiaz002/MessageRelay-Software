@@ -3,7 +3,7 @@
 #include <QtGui>
 #include <QIcon>
 #include <messageutils.h>
-
+#include <messagewindow.h>
 void MainWindow::activated(QSystemTrayIcon::ActivationReason reason)
 {
     qDebug()<<reason;
@@ -22,13 +22,12 @@ void MainWindow::quitApp()
 
 void MainWindow::readServerData(QByteArray data)
 {
+    int name_index = data.indexOf(0x01);
     int num_index= data.indexOf(0x02);
     int msg_index= data.indexOf(0x03);
-    trayIcon->showMessage(data.left(num_index),data.mid(num_index+1,(msg_index-num_index)-1),QIcon());
+    trayIcon->showMessage(data.left(name_index),data.mid(num_index+1,(msg_index-num_index)-1),QIcon());
 
-    MessageItem msg;
-    msg.num=data.left(num_index);
-    msg.message =data.mid(num_index+1,(msg_index-num_index)-1);
+    MessageItem msg={data.left(name_index),data.mid(name_index+1,(num_index-name_index)-1),data.mid(num_index+1,(msg_index-num_index)-1),0};
     (*notiPanel) << msg;
 
     //Add entry to our logs if not found in logs.
@@ -194,7 +193,10 @@ void MainWindow::getIPAddress()
 
 void MainWindow::openMessageWindow(MessageWidget * item)
 {
-
+    //TODO:Keep Track of message windows
+    //TODO:Update Message Window when a new message comes in.
+    MessageWindow * win = new MessageWindow(&chatLogs->at(item->data.num.toStdString()),this);
+    win->show();
     delete item;
 }
 
