@@ -22,6 +22,9 @@ public slots:
     void notificationClicked(MessageWidget *);
 signals:
     void openMessageWindow(MessageWidget*);
+private slots:
+    void on_pushButton_2_clicked();
+
 private:
     Ui::NotiPanel *ui;
     QRect setDialogSize();
