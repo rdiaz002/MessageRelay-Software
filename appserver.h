@@ -18,6 +18,7 @@ public slots:
     void getSocket();
     void socketDisconnected();
     void readSocket();
+    void writeSocket(QByteArray);
 private:
     QHostAddress * address;
     quint16 port;

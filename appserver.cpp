@@ -56,3 +56,10 @@ void AppServer::readSocket()
     emit receivedData(data);
 }
 
+void AppServer::writeSocket(QByteArray data)
+{
+    if(client!=nullptr && client->isWritable()){
+        client->write(data);
+    }
+}
+

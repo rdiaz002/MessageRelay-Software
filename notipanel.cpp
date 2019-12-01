@@ -72,7 +72,6 @@ void NotiPanel::operator<<(MessageItem item) //Create a new MessageWidget and ad
 void NotiPanel::on_pushButton_2_clicked()
 {
     for(MessageWidget* i: *notifications){
-        qDebug()<<"Works";
         ui->verticalLayout->removeWidget(i);
         delete i;
     }

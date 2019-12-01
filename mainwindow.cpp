@@ -195,7 +195,8 @@ void MainWindow::openMessageWindow(MessageWidget * item)
 {
     //TODO:Keep Track of message windows
     //TODO:Update Message Window when a new message comes in.
-    MessageWindow * win = new MessageWindow(&chatLogs->at(item->data.num.toStdString()),this);
+    MessageWindow * win = new MessageWindow(item->data.num,&chatLogs->at(item->data.num.toStdString()),this);
+    connect(win,&MessageWindow::sendMessage,appServer,&AppServer::writeSocket);
     win->show();
     delete item;
 }

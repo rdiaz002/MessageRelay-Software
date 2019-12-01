@@ -5,9 +5,10 @@
 
 //TODO: Update Message Window Styling.
 
-MessageWindow::MessageWindow(QStringList * msgList,QWidget *parent) :
+MessageWindow::MessageWindow(QString num,QStringList * msgList,QWidget *parent) :
     QDialog(parent),
     ui(new Ui::MessageWindow),
+    number(num),
     msgList(msgList)
 {
     ui->setupUi(this);
@@ -52,6 +53,14 @@ void MessageWindow::updateMessages()
 void MessageWindow::on_sendButton_clicked()
 {
     //TODO: add the sending protocol to communicate with client app.
+    QString msg= ui->textBox->toPlainText();
+    msgList->push_back(msg);
+    QByteArray data;
+    data+=this->number;
+    data+=0x02;
+    data+=msg;
+    data+='\n';
+    emit sendMessage(data);
     updateMessages();
 }
 
