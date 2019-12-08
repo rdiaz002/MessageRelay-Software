@@ -68,3 +68,8 @@ void MessageWindow::slideChange(int, int)
 {
     vert->setValue(vert->maximum());
 }
+
+void MessageWindow::on_MessageWindow_finished(int result)
+{
+    emit closeWindow(number);
+}

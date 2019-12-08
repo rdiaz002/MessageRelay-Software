@@ -13,7 +13,7 @@
 #include <unordered_map>
 #include <vector>
 #include <QString>
-
+#include <messagewindowmanager.h>
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -43,7 +43,7 @@ private:
     void writeSavedData();
     void getIPAddress();
 
-
+    MessageWindowManager * windowMan;
     Dialog * settingsDialog;
     QSystemTrayIcon *trayIcon;
     QMenu *trayIconMenu;

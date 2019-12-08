@@ -27,6 +27,7 @@ void MainWindow::readServerData(QByteArray data)
     int msg_index= data.indexOf(0x03);
     trayIcon->showMessage(data.left(name_index),data.mid(num_index+1,(msg_index-num_index)-1),QIcon());
 
+
     MessageItem msg={data.left(name_index),data.mid(name_index+1,(num_index-name_index)-1),data.mid(num_index+1,(msg_index-num_index)-1),0};
     (*notiPanel) << msg;
 
@@ -36,6 +37,8 @@ void MainWindow::readServerData(QByteArray data)
     }
     chatLogs->at(msg.num.toStdString()).push_back(msg.message);
 
+    //Todo: Specialize function to update specific window.
+    windowMan->updateWindows();
 
 }
 
@@ -66,6 +69,7 @@ MainWindow::MainWindow()
     trayIcon->show();
     appThread->start();
 
+    windowMan = new MessageWindowManager(appServer,this);
 
 
 }
@@ -193,11 +197,8 @@ void MainWindow::getIPAddress()
 
 void MainWindow::openMessageWindow(MessageWidget * item)
 {
-    //TODO:Keep Track of message windows
-    //TODO:Update Message Window when a new message comes in.
-    MessageWindow * win = new MessageWindow(item->data.num,&chatLogs->at(item->data.num.toStdString()),this);
-    connect(win,&MessageWindow::sendMessage,appServer,&AppServer::writeSocket);
-    win->show();
+    //TODO:Add windowManager
+    windowMan->openWindow(item->data.num,&chatLogs->at(item->data.num.toStdString()));
     delete item;
 }
 

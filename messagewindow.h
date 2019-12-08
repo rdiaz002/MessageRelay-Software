@@ -17,10 +17,12 @@ public:
     void updateMessages();
 signals:
     void sendMessage(QByteArray data);
-
+    void closeWindow(QString number);
 private slots:
     void on_sendButton_clicked();
     void slideChange(int, int);
+    void on_MessageWindow_finished(int result);
+
 private:
     Ui::MessageWindow *ui;
     QStringList * msgList;
