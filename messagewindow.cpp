@@ -13,8 +13,12 @@ MessageWindow::MessageWindow(QString num,QStringList * msgList,QWidget *parent) 
 {
     ui->setupUi(this);
     ui->chatBox->setAlignment(Qt::AlignTop);
-    ui->chatBox->setSizeConstraint(QLayout::SetMinimumSize);
+    ui->chatBox->setSizeConstraint(QLayout::SetDefaultConstraint);
+    ui->chatBox->setColumnStretch(0,1);
+    ui->chatBox->setColumnStretch(2,1);
+    ui->chatBox->setColumnStretch(1,1);
     vert = ui->scrollArea->verticalScrollBar();
+
     connect(vert,&QAbstractSlider::rangeChanged,this,&MessageWindow::slideChange);
     updateMessages();
 }
@@ -37,14 +41,19 @@ void MessageWindow::updateMessages()
     }
 
     for(auto i : *msgList){
-        QLabel * msg = new QLabel(i);
+        QLabel * msg = new QLabel(i.mid(1));
         msg->setAlignment(Qt::AlignLeft);
         msg->setWordWrap(true);
         msg->setContentsMargins(0,10,0,10);
         msg->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::MinimumExpanding);
         msg->setMaximumWidth(100);
         msg->adjustSize();
-        ui->chatBox->addWidget(msg);
+        if(i[0]==0x04){
+            ui->chatBox->addWidget(msg,ui->chatBox->rowCount(),0);
+        }else{
+            ui->chatBox->addWidget(msg,ui->chatBox->rowCount(),2);
+        }
+
     }
 
 
@@ -52,15 +61,16 @@ void MessageWindow::updateMessages()
 
 void MessageWindow::on_sendButton_clicked()
 {
-    //TODO: add the sending protocol to communicate with client app.
+    //TODO: Fix weird sending bug when long messages are typed.
     QString msg= ui->textBox->toPlainText();
-    msgList->push_back(msg);
+    msgList->push_back(0x05+msg);
     QByteArray data;
     data+=this->number;
     data+=0x02;
     data+=msg;
     data+='\n';
     emit sendMessage(data);
+    ui->textBox->clear();
     updateMessages();
 }
 

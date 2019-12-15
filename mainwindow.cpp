@@ -35,7 +35,7 @@ void MainWindow::readServerData(QByteArray data)
     if(chatLogs->find(msg.num.toStdString())==chatLogs->end()){
         chatLogs->insert(std::make_pair(msg.num.toStdString(),QStringList()));
     }
-    chatLogs->at(msg.num.toStdString()).push_back(msg.message);
+    chatLogs->at(msg.num.toStdString()).push_back(0x04+msg.message);
 
     //Todo: Specialize function to update specific window.
     windowMan->updateWindows();
