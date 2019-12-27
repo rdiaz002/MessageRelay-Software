@@ -37,8 +37,8 @@ void MainWindow::readServerData(QByteArray data)
     }
     chatLogs->at(msg.num.toStdString()).push_back(0x04+msg.message);
 
-    //Todo: Specialize function to update specific window.
-    windowMan->updateWindows();
+    //Specialize function to update specific window.
+    windowMan->updateWindow(msg.num);
 
 }
 

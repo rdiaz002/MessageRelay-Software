@@ -10,7 +10,7 @@ MessageWindowManager::MessageWindowManager(AppServer *server, QObject *parent):
 
 void MessageWindowManager::openWindow(QString number, QStringList * logs)
 {
-    if(!activeWindows.count(number.toStdString())){
+    if(!activeWindows.count(number.toStdString())){ //Check if chat window with associated number is active.
         MessageWindow * win = new MessageWindow(number,logs);
         connect(win,&MessageWindow::sendMessage,server,&AppServer::writeSocket);
         connect(win,&MessageWindow::closeWindow,this,&MessageWindowManager::closeWindow);
@@ -26,6 +26,15 @@ void MessageWindowManager::updateWindows()
 {
     for(auto i: activeWindows){
         i.second->updateMessages();
+    }
+}
+
+void MessageWindowManager::updateWindow(QString number)
+{
+    if(activeWindows.count(number.toStdString())){
+        auto activeWindow = activeWindows.at(number.toStdString());
+        activeWindow->updateMessages();
+        activeWindow->activateWindow();
     }
 }
 

@@ -12,6 +12,7 @@ public:
     explicit MessageWindowManager(AppServer * server,QObject *parent = nullptr);
     void openWindow(QString number,QStringList * logs);
     void updateWindows();
+    void updateWindow(QString number);
 signals:
 
 public slots:
