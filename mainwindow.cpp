@@ -6,7 +6,9 @@
 #include <messagewindow.h>
 void MainWindow::activated(QSystemTrayIcon::ActivationReason reason)
 {
-    qDebug()<<reason;
+    if(reason==QSystemTrayIcon::DoubleClick){
+        settingsDialog->show();
+    }
 }
 
 void MainWindow::connectServer()
@@ -105,8 +107,8 @@ void MainWindow::setupActions()
     notifications = new QAction("Notifications",this);
     connect(notifications,&QAction::triggered,notiPanel,&NotiPanel::show);
 
-    trayIconMenu->addAction(notifications);
     trayIconMenu->addAction(openSettings);
+    trayIconMenu->addAction(notifications);
     trayIconMenu->addAction(disconnect);
     trayIconMenu->addAction(quit);
 
@@ -119,13 +121,20 @@ void MainWindow::setupConnections()
     connect(appThread,SIGNAL(started()),settingsDialog,SLOT(connectedServer()));
     connect(appThread,SIGNAL(finished()),appServer,SLOT(endServer()));
     connect(appThread,SIGNAL(finished()),settingsDialog,SLOT(disconnectedServer()));
+
     connect(appServer,SIGNAL(errorListening()),settingsDialog,SLOT(disconnectedServer()));
     connect(appServer,&AppServer::receivedData,this,&MainWindow::readServerData);
     connect(appServer,SIGNAL(errorListening()),appThread,SLOT(quit()));
+
     connect(quit,SIGNAL(triggered()),appThread,SLOT(quit()));
+
     connect(settingsDialog,&Dialog::connectServer,this,&MainWindow::connectServer);
     connect(settingsDialog,&Dialog::disconnectServer,appThread,&QThread::quit);
+
     connect(notiPanel,&NotiPanel::openMessageWindow,this,&MainWindow::openMessageWindow);
+
+    connect(trayIcon,&QSystemTrayIcon::activated,this,&MainWindow::activated);
+
 }
 
 

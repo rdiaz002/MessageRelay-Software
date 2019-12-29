@@ -1,7 +1,7 @@
 #ifndef NOTIPANEL_H
 #define NOTIPANEL_H
 
-#include <QDialog>
+#include <QFrame>
 #include "messageutils.h"
 #include <unordered_set>
 #include "messagewidget.h"
@@ -10,7 +10,7 @@ namespace Ui {
 class NotiPanel;
 }
 
-class NotiPanel : public QDialog
+class NotiPanel : public QFrame
 {
     Q_OBJECT
 

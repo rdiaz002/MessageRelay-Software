@@ -11,7 +11,7 @@
 //TODO: Add notipanel clear all messages.
 
 NotiPanel::NotiPanel(QWidget *parent) :
-    QDialog(parent),
+    QFrame(parent),
     ui(new Ui::NotiPanel)
 {
     ui->setupUi(this);
@@ -24,13 +24,15 @@ NotiPanel::NotiPanel(QWidget *parent) :
 //    this->operator<<({QString("Hell0"),QString("Hi2"),0});
 
     ui->verticalLayout->setAlignment(Qt::AlignTop);
-    this->setWindowFlag(Qt::FramelessWindowHint,true);
-    this->setWindowFlag(Qt::Popup,true);
+    //this->setWindowFlag(Qt::FramelessWindowHint,true);
+    //this->setWindowFlag(Qt::Popup,true);
 
     this->setGeometry(setDialogSize());
     this->updateGeometry();
     this->setStyleSheet("#NotiPanel{border: 1px solid black;border-radius: 10px;}");
-
+    QPainterPath path;
+    path.addRoundedRect(rect(),11,11);
+    this->setMask(QRegion(path.toFillPolygon().toPolygon()));
 }
 
 NotiPanel::~NotiPanel()
