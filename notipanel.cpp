@@ -29,7 +29,7 @@ NotiPanel::NotiPanel(QWidget *parent) :
 
     this->setGeometry(setDialogSize());
     this->updateGeometry();
-    this->setStyleSheet("#NotiPanel{border: 1px solid black;border-radius: 10px;}");
+
     QPainterPath path;
     path.addRoundedRect(rect(),11,11);
     this->setMask(QRegion(path.toFillPolygon().toPolygon()));

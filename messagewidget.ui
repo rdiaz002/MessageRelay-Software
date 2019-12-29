@@ -14,11 +14,20 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">#MessageWidget{border:1px solid blue; border-radius:10px;}</string>
+   <string notr="true">*{
+background-color: #303030;
+color:white;
+}
+QFrame#MessageWidget{border:1px solid ; border-radius:10px;}
+
+</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QLabel" name="number">
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
      <property name="text">
       <string>num</string>
      </property>
