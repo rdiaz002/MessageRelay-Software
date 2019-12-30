@@ -12,6 +12,7 @@ MessageWindow::MessageWindow(QString num,QStringList * msgList,QWidget *parent) 
     msgList(msgList)
 {
     ui->setupUi(this);
+    this->setWindowTitle(number);
     ui->chatBox->setAlignment(Qt::AlignTop);
     ui->chatBox->setSizeConstraint(QLayout::SetDefaultConstraint);
     ui->chatBox->setColumnStretch(0,1);
@@ -44,9 +45,10 @@ void MessageWindow::updateMessages()
         QLabel * msg = new QLabel(i.mid(1));
         msg->setAlignment(Qt::AlignLeft);
         msg->setWordWrap(true);
-        msg->setContentsMargins(10,2,10,0);
+        msg->setContentsMargins(10,2,10,2);
         msg->setMaximumWidth(static_cast<int>(this->width()*0.30));
-        msg->setSizePolicy(QSizePolicy::Minimum,QSizePolicy::MinimumExpanding);
+        msg->setMinimumHeight(20);
+        msg->setSizePolicy(QSizePolicy::Minimum,QSizePolicy::Minimum);
         msg->adjustSize();
         if(i[0]==0x04){
             msg->setProperty("sender",true);

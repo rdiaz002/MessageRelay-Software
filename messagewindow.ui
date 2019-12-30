@@ -24,6 +24,7 @@ border: 2px solid;
 
 QLabel[reciever=&quot;true&quot;]{
 background-color:#303030;
+border:2px;
 border-radius: 10px;
 color:white;
 }
@@ -46,8 +47,7 @@ color:white;
    <item>
     <widget class="QScrollArea" name="scrollArea">
      <property name="styleSheet">
-      <string notr="true">
-</string>
+      <string notr="true"/>
      </property>
      <property name="horizontalScrollBarPolicy">
       <enum>Qt::ScrollBarAsNeeded</enum>
@@ -64,7 +64,7 @@ color:white;
         <x>0</x>
         <y>0</y>
         <width>774</width>
-        <height>311</height>
+        <height>295</height>
        </rect>
       </property>
       <property name="sizePolicy">
