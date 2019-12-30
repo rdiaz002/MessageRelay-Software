@@ -13,18 +13,42 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">*{
+Background-color:#000000;
+color:white;
+}
+QDialog#MessageWindow{
+border: 2px solid;
+}
+
+QLabel[reciever=&quot;true&quot;]{
+background-color:#303030;
+border-radius: 10px;
+color:white;
+}
+QLabel[sender=&quot;true&quot;]{
+background-color:#3700B3;
+border-radius: 10px;
+color:white;
+}</string>
+  </property>
   <property name="sizeGripEnabled">
    <bool>false</bool>
   </property>
   <property name="modal">
    <bool>false</bool>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout" stretch="2,1">
+  <layout class="QVBoxLayout" name="verticalLayout" stretch="7,1">
    <property name="sizeConstraint">
     <enum>QLayout::SetMaximumSize</enum>
    </property>
    <item>
     <widget class="QScrollArea" name="scrollArea">
+     <property name="styleSheet">
+      <string notr="true">
+</string>
+     </property>
      <property name="horizontalScrollBarPolicy">
       <enum>Qt::ScrollBarAsNeeded</enum>
      </property>
@@ -40,7 +64,7 @@
         <x>0</x>
         <y>0</y>
         <width>774</width>
-        <height>257</height>
+        <height>311</height>
        </rect>
       </property>
       <property name="sizePolicy">
@@ -73,12 +97,29 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QTextEdit" name="textBox"/>
+      <widget class="QTextEdit" name="textBox">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QTextEdit#textBox{
+background-color:#303030;
+border: 2px solid;
+border-radius: 10px;
+}</string>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QPushButton" name="sendButton">
        <property name="text">
         <string>Send</string>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
        </property>
       </widget>
      </item>

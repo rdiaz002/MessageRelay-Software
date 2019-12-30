@@ -44,13 +44,16 @@ void MessageWindow::updateMessages()
         QLabel * msg = new QLabel(i.mid(1));
         msg->setAlignment(Qt::AlignLeft);
         msg->setWordWrap(true);
-        msg->setContentsMargins(0,10,0,10);
-        msg->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::MinimumExpanding);
-        msg->setMaximumWidth(100);
+        msg->setContentsMargins(10,2,10,0);
+        msg->setMaximumWidth(static_cast<int>(this->width()*0.30));
+        msg->setSizePolicy(QSizePolicy::Minimum,QSizePolicy::MinimumExpanding);
         msg->adjustSize();
         if(i[0]==0x04){
+            msg->setProperty("sender",true);
             ui->chatBox->addWidget(msg,ui->chatBox->rowCount(),0);
+
         }else{
+            msg->setProperty("reciever",true);
             ui->chatBox->addWidget(msg,ui->chatBox->rowCount(),2);
         }
 
