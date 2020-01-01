@@ -2,7 +2,7 @@
 #include "ui_messagewindow.h"
 #include<QDebug>
 #include<QLabel>
-
+#include <QKeyEvent>
 //TODO: Update Message Window Styling.
 
 MessageWindow::MessageWindow(QString num,QStringList * msgList,QWidget *parent) :
@@ -13,6 +13,9 @@ MessageWindow::MessageWindow(QString num,QStringList * msgList,QWidget *parent) 
 {
     ui->setupUi(this);
     this->setWindowTitle(number);
+    listener = new EnterListener();
+    listener->parent = this;
+    ui->textBox->installEventFilter(listener);
     ui->chatBox->setAlignment(Qt::AlignTop);
     ui->chatBox->setSizeConstraint(QLayout::SetDefaultConstraint);
     ui->chatBox->setColumnStretch(0,1);
@@ -87,4 +90,19 @@ void MessageWindow::slideChange(int, int)
 void MessageWindow::on_MessageWindow_finished(int result)
 {
     emit closeWindow(number);
+}
+
+
+
+bool MessageWindow::EnterListener::eventFilter(QObject * obj, QEvent * event)
+{
+    if(event->type() == QEvent::KeyPress){
+        QKeyEvent * keyEvent = static_cast<QKeyEvent *>(event);
+        if(parent != nullptr && keyEvent->key()==Qt::Key_Return && (keyEvent->modifiers()^Qt::ShiftModifier) ){ //make sure parent is not null and shift is not held.
+            parent->on_sendButton_clicked();
+            return true;
+        }
+    }
+    return QObject::eventFilter(obj,event);
+
 }

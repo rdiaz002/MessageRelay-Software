@@ -24,6 +24,14 @@ private slots:
     void on_MessageWindow_finished(int result);
 
 private:
+    struct EnterListener: public QObject{
+        protected:
+        bool eventFilter(QObject *, QEvent *);
+        public:
+        MessageWindow * parent;
+    };
+
+    EnterListener * listener;
     Ui::MessageWindow *ui;
     QStringList * msgList;
     QScrollBar* vert;
