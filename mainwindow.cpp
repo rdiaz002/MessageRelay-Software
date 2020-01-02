@@ -164,6 +164,9 @@ void MainWindow::readSavedData()
         if(line.empty()){
             continue;
         }
+        for(auto & i: line){
+            std::replace(i.begin(),i.end(),static_cast<char>(0x16),'\n');
+        }
         chatLogs->insert(std::make_pair(line.first().toStdString(),line.mid(1)));
     }
 
@@ -182,6 +185,7 @@ void MainWindow::writeSavedData()
     for(auto i: *chatLogs){
         stream<<QString::fromStdString(i.first);
         for(auto j: i.second){
+            std::replace(j.begin(),j.end(),'\n',static_cast<char>(0x16));
             stream<<static_cast<char>(0x02)<<j;
         }
         stream<<'\n';
