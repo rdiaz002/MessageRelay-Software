@@ -5,26 +5,26 @@
 
 namespace Ui {
 class Popup;
-static int windowCount =1;
+static int windowCount = 1;
 }
 
-class Popup : public QDialog
-{
-    Q_OBJECT
+class Popup : public QDialog {
+  Q_OBJECT
 
 public:
-    explicit Popup(QWidget *parent = nullptr);
-    void closeEvent(QCloseEvent *) override;
-    void displayMessage();
-    void showEvent(QShowEvent *) override;
-    ~Popup();
+  explicit Popup(QWidget *parent = nullptr);
+  void closeEvent(QCloseEvent *) override;
+  void displayMessage();
+  void showEvent(QShowEvent *) override;
+  void mousePressEvent(QMouseEvent *) override;
+  ~Popup();
 
 public slots:
-    void mClose();
-private:
-    Ui::Popup *ui;
-    void autoPos();
+  void mClose();
 
+private:
+  Ui::Popup *ui;
+  void autoPos();
 };
 
 #endif // POPUP_H

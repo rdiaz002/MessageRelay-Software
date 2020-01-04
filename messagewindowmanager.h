@@ -5,22 +5,21 @@
 #include "messagewindow.h"
 #include <unordered_map>
 #include "appserver.h"
-class MessageWindowManager : public QObject
-{
-    Q_OBJECT
+class MessageWindowManager : public QObject {
+  Q_OBJECT
 public:
-    explicit MessageWindowManager(AppServer * server,QObject *parent = nullptr);
-    void openWindow(QString number,QStringList * logs);
-    void updateWindows();
-    void updateWindow(QString number);
+  explicit MessageWindowManager(AppServer *server, QObject *parent = nullptr);
+  void openWindow(QString number, QStringList *logs);
+  void updateWindows();
+  void updateWindow(QString number);
 signals:
 
 public slots:
-    void closeWindow(QString number);
+  void closeWindow(QString number);
 
 private:
-    std::unordered_map<std::string,MessageWindow *> activeWindows;
-    AppServer * server;
+  std::unordered_map<std::string, MessageWindow *> activeWindows;
+  AppServer *server;
 };
 
 #endif // MESSAGEWINDOWMANAGER_H

@@ -10,27 +10,24 @@ namespace Ui {
 class NotiPanel;
 }
 
-class NotiPanel : public QFrame
-{
-    Q_OBJECT
+class NotiPanel : public QFrame {
+  Q_OBJECT
 
 public:
-    explicit NotiPanel(QWidget *parent = nullptr);
-    ~NotiPanel();
-     void operator<< (MessageItem);
+  explicit NotiPanel(QWidget *parent = nullptr);
+  ~NotiPanel();
+  void operator<<(MessageItem);
 public slots:
-    void notificationClicked(MessageWidget *);
+  void notificationClicked(MessageWidget *);
 signals:
-    void openMessageWindow(MessageWidget*);
+  void openMessageWindow(MessageWidget *);
 private slots:
-    void on_pushButton_2_clicked();
+  void on_pushButton_2_clicked();
 
 private:
-    Ui::NotiPanel *ui;
-    QRect setDialogSize();
-    std::unordered_set<MessageWidget *> * notifications;
-
-
+  Ui::NotiPanel *ui;
+  QRect setDialogSize();
+  std::unordered_set<MessageWidget *> *notifications;
 };
 
 #endif // NOTIPANEL_H

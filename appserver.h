@@ -3,27 +3,27 @@
 
 #include <QTcpServer>
 #include <QTcpSocket>
-class AppServer :public QObject
-{
-    Q_OBJECT
+class AppServer : public QObject {
+  Q_OBJECT
 public:
-    explicit AppServer(QHostAddress*,quint16 port,QObject *parent = nullptr);
+  explicit AppServer(QHostAddress *, quint16 port, QObject *parent = nullptr);
 
 signals:
-    void errorListening();
-    void receivedData(QByteArray);
+  void errorListening();
+  void receivedData(QByteArray);
 public slots:
-    void startServer();
-    void endServer();
-    void getSocket();
-    void socketDisconnected();
-    void readSocket();
-    void writeSocket(QByteArray);
+  void startServer();
+  void endServer();
+  void getSocket();
+  void socketDisconnected();
+  void readSocket();
+  void writeSocket(QByteArray);
+
 private:
-    QHostAddress * address;
-    quint16 port;
-    QTcpServer * host;
-    QTcpSocket * client;
+  QHostAddress *address;
+  quint16 port;
+  QTcpServer *host;
+  QTcpSocket *client;
 };
 
 #endif // APPSERVER_H

@@ -3,25 +3,25 @@
 
 #include <QFrame>
 #include "messageutils.h"
-#include<QMouseEvent>
+#include <QMouseEvent>
 namespace Ui {
 class MessageWidget;
 }
 
-class MessageWidget : public QFrame
-{
-    Q_OBJECT
+class MessageWidget : public QFrame {
+  Q_OBJECT
 
 public:
-    explicit MessageWidget(MessageItem & item,QWidget *parent = nullptr);
-    ~MessageWidget();
-    MessageItem data;
+  explicit MessageWidget(MessageItem &item, QWidget *parent = nullptr);
+  ~MessageWidget();
+  MessageItem data;
 signals:
-    void openMessageWindow(MessageWidget *);
+  void openMessageWindow(MessageWidget *);
+
 private:
-    Ui::MessageWidget *ui;
-    static unsigned int id;
-    void mousePressEvent(QMouseEvent *) override;
+  Ui::MessageWidget *ui;
+  static unsigned int id;
+  void mousePressEvent(QMouseEvent *) override;
 };
 
 #endif // MESSAGEWIDGET_H
