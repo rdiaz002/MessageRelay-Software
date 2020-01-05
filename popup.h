@@ -2,7 +2,8 @@
 #define POPUP_H
 
 #include <QDialog>
-
+#include <QPropertyAnimation>
+#include <QSequentialAnimationGroup>
 namespace Ui {
 class Popup;
 static int windowCount = 1;
@@ -15,7 +16,6 @@ public:
   explicit Popup(QWidget *parent = nullptr);
   void closeEvent(QCloseEvent *) override;
   void displayMessage();
-  void showEvent(QShowEvent *) override;
   void mousePressEvent(QMouseEvent *) override;
   ~Popup();
 
@@ -23,6 +23,9 @@ public slots:
   void mClose();
 
 private:
+  QPropertyAnimation *anim1;
+  QPropertyAnimation *anim2;
+  QSequentialAnimationGroup *group;
   Ui::Popup *ui;
   void autoPos();
 };

@@ -7,7 +7,6 @@
 int main(int argc, char *argv[]) {
   QApplication a(argc, argv);
   MainWindow w;
-
   // Testing new message Window
   //    QStringList * msgList = new
   //    QStringList{"Hello","GOOdbye","Voog","GOOdbye","Voog","GOOdbye","Voog","GOOdbye","Voog","GOOdbye","Voog","GOOdbye","Voog","GOOdbye","Voog","GOOdbye","Voog","GOOdbye","Voog","GOOdbye","Voog"};
