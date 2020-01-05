@@ -7,7 +7,7 @@
 #include <QPropertyAnimation>
 #include <QSequentialAnimationGroup>
 #include <QDebug>
-Popup::Popup(QWidget *parent) : QDialog(nullptr), ui(new Ui::Popup) {
+Popup::Popup(QWidget *) : QDialog(nullptr), ui(new Ui::Popup) {
 
   ui->setupUi(this);
   setStyleSheet("background-color:#ffffff");
@@ -41,7 +41,7 @@ void Popup::autoPos() {
   int x, y;
   x = desktopRect.width() - (this->width());
   y = h_max;
-  this->move(x, h_max);
+  this->move(x, y);
 }
 void Popup::closeEvent(QCloseEvent *e) { e->accept(); }
 
