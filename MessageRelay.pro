@@ -19,6 +19,7 @@ SOURCES += \
     appserver.cpp \
     dialog.cpp \
     main.cpp \
+    mainhub.cpp \
     mainwindow.cpp \
     messagewidget.cpp \
     messagewindow.cpp \
@@ -29,6 +30,7 @@ SOURCES += \
 HEADERS += \
     appserver.h \
     dialog.h \
+    mainhub.h \
     mainwindow.h \
     messageutils.h \
     messagewidget.h \
@@ -39,6 +41,7 @@ HEADERS += \
 
 FORMS += \
     dialog.ui \
+    mainhub.ui \
     mainwindow.ui \
     messagewidget.ui \
     messagewindow.ui \
