@@ -4,6 +4,7 @@
 #include "popup.h"
 #include "notipanel.h"
 #include "messagewindow.h"
+#include "customicon.h"
 int main(int argc, char *argv[]) {
   QApplication a(argc, argv);
   MainWindow w;
@@ -13,7 +14,7 @@ int main(int argc, char *argv[]) {
   //    MessageWindow temp(msgList,nullptr);
   //    temp.show();
 
-  // w.show();
+   //w.show();
 
   return a.exec();
 }

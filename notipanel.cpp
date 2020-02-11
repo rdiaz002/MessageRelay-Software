@@ -21,8 +21,8 @@ NotiPanel::NotiPanel(QWidget *parent) : QFrame(parent), ui(new Ui::NotiPanel) {
   //    this->operator<<({QString("Hell0"),QString("Hi2"),0});
 
   ui->verticalLayout->setAlignment(Qt::AlignTop);
-  // this->setWindowFlag(Qt::FramelessWindowHint,true);
-  // this->setWindowFlag(Qt::Popup,true);
+  this->setWindowFlag(Qt::FramelessWindowHint,true);
+  this->setWindowFlag(Qt::Popup,true);
 
   this->setGeometry(setDialogSize());
   this->updateGeometry();

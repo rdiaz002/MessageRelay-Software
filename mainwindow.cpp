@@ -63,9 +63,11 @@ MainWindow::MainWindow() {
   setupConnections();
 
   appServer->moveToThread(appThread);
-  trayIcon->show();
-  appThread->start();
 
+  //TODO: Create TrayIcon Alternative For Linux.
+  trayIcon->show();
+
+  appThread->start();
   windowMan = new MessageWindowManager(appServer, this);
 }
 

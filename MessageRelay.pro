@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     appserver.cpp \
+    customicon.cpp \
     dialog.cpp \
     main.cpp \
     mainhub.cpp \
@@ -29,6 +30,7 @@ SOURCES += \
 
 HEADERS += \
     appserver.h \
+    customicon.h \
     dialog.h \
     mainhub.h \
     mainwindow.h \
@@ -40,6 +42,7 @@ HEADERS += \
     popup.h
 
 FORMS += \
+    customicon.ui \
     dialog.ui \
     mainhub.ui \
     mainwindow.ui \
