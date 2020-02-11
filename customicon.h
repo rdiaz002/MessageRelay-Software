@@ -17,6 +17,7 @@ public:
 
 private:
     Ui::CustomIcon *ui;
+    QRect setDialogLocation();
 };
 
 #endif // CUSTOMICON_H
